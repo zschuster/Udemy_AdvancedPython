@@ -1,4 +1,3 @@
-
 class Node:
 	def __init__(self, data = None):
 		self.data = data
@@ -49,6 +48,29 @@ class SLinkedList:
 		new_node.next = node.next
 		node.next = new_node
 
+	# delete element from list
+	def del_node(self, data):
+		head_val = self.head
+
+		if head_val is not None:
+			if head_val.data == data:
+				self.head = head_val.next
+				head_val = None
+				return
+
+		while head_val is not None:
+			if head_val.data == data:
+				break
+			prev = head_val
+			head_val = head_val.next
+
+		if head_val == None:
+			return
+
+		# make sure connections are proper
+		prev.next = head_val.next
+		head_val = None
+
 
 # create and test singly linked list implementation
 s_list = SLinkedList()
@@ -69,4 +91,10 @@ s_list.insert_end("Thurs")
 # test insert_between
 s_list.insert_between(s_list.head.next.next, "Tue night")
 
+s_list.listprint()
+
+# test del_node method
+to_del = "Wed"
+print("\nDeleting", to_del, "node.")
+s_list.del_node(to_del)
 s_list.listprint()
