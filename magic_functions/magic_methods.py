@@ -1,5 +1,5 @@
-# The purpose of this script is to get acquainted with unary operator methods
 
+# The purpose of this script is to get acquainted with unary operator methods
 
 class Operations:
 	def __init__(self, *args):
@@ -17,15 +17,19 @@ class Operations:
 		return Operations(*mul)
 
 
-# define objects for addition
-obj1 = Operations(3, 4, 5)
-obj2 = Operations(7, 8, 9)
+if __name__ == '__main__':
+	# using class Addition
 
-print("Addition")
-print((obj1 + obj2).numbers)
+	# define objects for addition
+	obj1 = Operations(3, 4, 5)
+	obj2 = Operations(7, 8, 9)
 
-obj3 = Operations(3, 3, 3)
-obj4 = Operations(5, 6, 7)
+	print("Addition")
+	print((obj1 + obj2).numbers)
 
-print("\nMultiplication")
-print((obj3 * obj4).numbers)
+	# define objects for multiplication
+	obj3 = Operations(3, 3, 3)
+	obj4 = Operations(5, 6, 7)
+
+	print("\nMultiplication")
+	print((obj3 * obj4).numbers)
