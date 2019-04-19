@@ -1,11 +1,13 @@
-from threading import Thread, Lock
+from threading import Thread, Lock, Semaphore
 
 
 # create a flight reservation class to purchase tickets
 class FlightReservation:
+	# create a lock for a given thread. Can use the Lock class or the
+	# Semaphore class.
 
-	# create a lock for a given thread
-	lock = Lock()
+	# lock = Lock()
+	lock = Semaphore()
 
 	def __init__(self, tickets_left):
 		self.tickets_left = tickets_left
