@@ -14,7 +14,7 @@ s.bind((host, port))
 def broadcast(msg, prefix=''):
 	# send message to all clients in chat
 	for cl in clients:
-		cl.send(bytes(prefix, 'utf8') + msg)
+		cl.send(bytes(prefix + msg, 'utf8'))
 
 
 def handle_client(connection):
@@ -27,8 +27,8 @@ def handle_client(connection):
 	connection.send(bytes(welcome_msg, 'utf8'))
 
 	# send message to all clients that new user is available
-	broad_msg = name + 'has joined the chat room.'
-	broadcast(bytes(broad_msg, 'utf8'))
+	broad_msg = name + ' has joined the chat room.'
+	broadcast(broad_msg)
 
 	# add client to dict
 	clients[connection] = name
@@ -38,7 +38,7 @@ def handle_client(connection):
 		client_message = connection.recv(1024)
 
 		if client_message != bytes('#quit', 'utf8'):
-			broadcast(client_message, name + ':')
+			broadcast(client_message.decode('utf8'), name + ': ')
 
 		else:
 			connection.send(bytes('You have left the chat room', 'utf8'))
@@ -59,7 +59,7 @@ def accept_client_conns():
 		addresses[client_conn] = client_address
 
 		# create a thread for client
-		Thread(target=handle_client, args=(client_conn, client_address)).start()
+		Thread(target=handle_client, args=(client_conn, )).start()
 
 
 if __name__ == '__main__':
